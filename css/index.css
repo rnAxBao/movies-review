@@ -1,0 +1,124 @@
+html {
+    color: #111;
+    background: #fff;
+}
+
+body {
+    font: 12px Helvetica, Arial, sans-serif;
+    line-height: 1.62;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
+/* 顶部用户功能栏 */
+
+.top-nav {
+    width: 100%;
+    height: 28px;
+    color: #d5d5d5;
+    background-color: #545652;
+}
+
+.user-menu {
+    float: right;
+}
+
+.user-menu li {
+    float: left;
+    padding: 0 5px;
+    margin-right: 5px;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.user-menu li:nth-child(3),
+.user-menu li:nth-child(4) {
+    display: none;
+}
+
+/* 搜索导航栏 */
+
+.search-nav {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 40px;
+    background-color: #f0f3f5;
+    border-bottom: 1px solid #e5ebe4;
+}
+
+.search-bar {
+    position: relative;
+    padding: 10px 0 5px;
+    overflow: hidden;
+    
+}
+
+.search-bar .logo {
+    float: left;
+    width: 145px;
+    margin: 0 13px 0 0;
+    padding-top: 2px;
+}
+
+.search-bar .logo a {
+    font-size: 30px;
+    color: #27a;
+}
+
+.search {
+    margin-left: 145px;
+    position: relative;
+    padding: 10px 0 15px 0;
+}
+
+.search input {
+    border: none;
+    outline: none;
+}
+
+.search .search-input-wrap {
+    float: left;
+    width: 470px;
+    height: 34px;
+    text-align: center;
+    margin-right: -3px;
+    background-image: url("../img/nav_mv_bg.png");
+    cursor: text;
+}
+
+#searchInput {
+    background: #fff;
+    width: 96%;
+    margin: 0;
+    text-align: left;
+    height: 30px;
+    padding-left: 10px;
+}
+
+.search .search-btn-wrap {
+    position: relative;
+    left: -1px;
+    width: 37px;
+    height: 34px;
+    zoom: 1;
+    overflow: hidden;
+}
+#searchBtn {
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+    padding: 35px 0 0 0;
+    overflow: hidden;
+    color: transparent;
+    background: url("../img/nav_mv_bg.png") no-repeat 0 -40px;
+}

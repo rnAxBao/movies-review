@@ -1,12 +1,47 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title>主页</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-		
-	</head>
-	<body>
-		
-	</body>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>影评网</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+	<div class="top-nav">
+		<div class="container">
+			<ul class="user-menu">
+				<li id="login">登录</li>
+				<li id="register">注册</li>
+				<li id="username"></li>
+				<li id="logout">退出</li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-nav">
+		<div class="container">
+			<div class="search-bar">
+				<div class="logo">
+					<a href="">影评网</a>
+				</div>
+				<div class="search">
+					<div class="search-input-wrap">
+						<input id="searchInput" name="search_text" size="22" maxlength="60" placeholder="搜索电影、电视剧、综艺、影人">
+					</div>
+					<div class="search-btn-wrap">
+						<input id="searchBtn" type="submit">
+					</div>
+				</div>
+			</div>
+			<div class="tab-nav"></div>
+		</div>
+	</div>
+
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/index.js"></script>
+</body>
+
 </html>
