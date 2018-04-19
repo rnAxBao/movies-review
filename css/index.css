@@ -230,6 +230,7 @@ a:hover {
     position: absolute;
     left: 0;
     white-space: nowrap;
+    transition: all .5s ease-out;
 }
 
 .screening .ui-slide-item {
@@ -262,6 +263,7 @@ a:hover {
     letter-spacing: -0.31em;
     font-size: 14px;
     white-space: nowrap;
+    text-overflow:ellipsis;
     height: 22px;
     overflow: hidden;
 }
