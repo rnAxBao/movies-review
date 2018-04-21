@@ -213,7 +213,7 @@ a:hover {
 }
 
 .screening-head h2 {
-    color: #111;
+    color: #072;
     padding-bottom: 10px;
     border-bottom: 1px solid #eaeaea;
     margin-bottom: 18px;
@@ -230,7 +230,6 @@ a:hover {
     position: absolute;
     left: 0;
     white-space: nowrap;
-    transition: all .5s ease-out;
 }
 
 .screening .ui-slide-item {
@@ -313,4 +312,12 @@ a:hover {
 .screening .ticket_btn a:active {
     background: none;
     color: #fff;
+}
+
+.top250-head h2 {
+    color: #072;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+    margin-bottom: 18px;
+    font-size: 16px;
 }

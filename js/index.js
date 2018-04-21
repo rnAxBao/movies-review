@@ -27,23 +27,22 @@ $(function () {
                 dataType: "jsonp",
                 success: function (data) {
                     let res2 = data;
+                    console.log(res2);
                     for (let j = 0; j < res2.subjects.length; j++) {
                         let li = $('<li class="ui-slide-item"></li>');
                         addMovieItem(ulWrap, li, res2, j);
                     }
-
-                    /* 给图片绑定懒加载 */
-                    $("img.lazy").lazyload({
-                        placeholder: "img/grey.gif",
-                        effect: "fadeIn",
-                        threshold: 3000
-                    });
+                    /* 循环轮播的html结构 */
+                    let behindItems = $(".screening-body>ul>li").slice(0, 5);
+                    ulWrap.append(behindItems.clone());
                 }
             });
 
             /* 取得slider的总页数 */
-            $(".show-page .ui-slide-max").text(Math.ceil(res.total / 5));
+            let pages = Math.ceil(res.total / 5);
+            $(".show-page .ui-slide-max").text(pages);
 
+            /* 封装插入电影条目函数 */
             function addMovieItem(faEle, sonEle, data, index) {
                 let movieId = data.subjects[index].id;
                 let moviePic = data.subjects[index].images.small;
@@ -53,7 +52,7 @@ $(function () {
                             <ul>
 								<li class="poster">
 									<a href="">
-									    <img class="lazy" data-original=${moviePic} alt=${movieName} width="128" height="179">
+									    <img src=${moviePic} alt=${movieName} width="128" height="179">
 								    </a>
 								</li>
 								<li class="title">
@@ -65,11 +64,18 @@ $(function () {
 								</li>
 								<li class="ticket_btn">
 								    <span>
-								    	<a href="" target="_blank">加入影库</a>
+								    	<a href="" target="_blank">查看详情</a>
 								    </span>
 								</li>
                             </ul>`;
                 faEle.append(sonEle.attr("data-id", movieId).append(html));
+                // /* 给图片绑定懒加载 */
+                // $("img.lazy").lazyload({
+                //     placeholder: "img/grey.gif",
+                //     effect: "fadeIn",
+                //     container: $(".screening-body")
+                // });
+                /* 使用评分插件 */
                 if (movieRating != 0) {
                     sonEle.find(".rating .rating-star").starRating({
                         initialRating: (movieRating / 10 * 5).toFixed(1),
@@ -86,30 +92,61 @@ $(function () {
     });
 
     /* 绑定slider事件 */
-    let slideIndex = 1;
-    let slideX = 0;
-    $(".paging .btn-next").click(function () {
-        slideIndex++;
-        slideX += -700;
-        if (slideIndex == 8) {
-            slideIndex = 1;
-            slideX = 0;
-        }
-        /* 显示当前页数 */
-        $(".show-page .ui-slide-index").text(slideIndex);
-        $(".screening .ui-slide-content").css("transform", "translateX(" + slideX + "px)");
+
+    /* 自动轮播 */
+    let timer;
+    timer = setInterval(slideNext, 5000);
+    $(".screening").mouseover(function () {
+        clearInterval(timer);
     });
+    $(".screening").mouseout(function () {
+        timer = setInterval(slideNext, 5000);
+    });
+
+    let sliderTimer;
+    let slideIndex = 0;
+    $(".paging .btn-next").click(slideNext);
+
+    function slideNext() {
+        if (slideIndex == 7) {
+            slideIndex = 0;
+            $(".screening .ui-slide-content").css("transform", "translateX(0px)");
+        }
+        slideIndex++;
+        autoSlide();
+    }
     $(".paging .btn-prev").click(function () {
-        slideIndex--;
-        slideX += 700;
         if (slideIndex == 0) {
             slideIndex = 7;
-            slideX = -4200;
+            $(".screening .ui-slide-content").css("transform", "translateX(" + -700 * slideIndex + "px)");
         }
-        /* 显示当前页数 */
-        $(".show-page .ui-slide-index").text(slideIndex);
-        $(".screening .ui-slide-content").css("transform", "translateX(" + slideX + "px)");
+        slideIndex--;
+        autoSlide();
     });
+
+    function autoSlide() {
+        /* 缓动函数动画 */
+        let t = 0;
+        let b = $(".screening .ui-slide-content").position().left;
+        let c = -700 * slideIndex - b;
+        let d = 80;
+        clearInterval(sliderTimer);
+        sliderTimer = setInterval(function () {
+            t++;
+            if (t == 80) {
+                clearInterval(sliderTimer);
+            }
+            $(".screening .ui-slide-content").css("transform", "translateX(" + Tween.Cubic.easeOut(t, b, c, d) + "px)");
+        }, 10);
+        /* 显示当前页数 */
+        if (slideIndex == 7) {
+            $(".show-page .ui-slide-index").text(1);
+        } else {
+            $(".show-page .ui-slide-index").text(slideIndex + 1);
+        }
+    }
+
+
     /* 电影搜索 */
     $("#searchBtn").click(function () {
         let keyword = $("#searchInput").val();
