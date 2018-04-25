@@ -208,8 +208,6 @@ a:hover {
     margin-bottom: 36px;
 }
 
-.screening-head {}
-
 .screening-head .paging {
     float: right;
     margin: 5px 0 0 15px;
@@ -410,6 +408,69 @@ a:hover {
     cursor: pointer;
     background-color: #f5f5f5;
     color: #336699;
+}
+
+/* 内容右侧 */
+
+.con-right>div {
+    display: none;
+    margin: 0 0 20px;
+    padding: 16px 0 16px 18px;
+    line-height: 1.5;
+    background: #f2f7f6;
+    border-radius: 4px;
+    width: 282px;
+}
+
+.con-right>div>h3 {
+    margin-top: 10px;
+    color: #072;
+    font-size: 16px;
+}
+
+.con-right>div .btn {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.con-right>div button[type=submit] {
+    margin-right: 38px;
+}
+
+.con-right .login {
+    display: block;
+    width: 300px;
+}
+
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.form-control {
+    width: 93%;
+}
+
+.form-control:focus {
+    border-color: #ccc;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.form-horizontal .checkbox {
+    padding-top: 0;
+    margin-bottom: 10px;
+}
+
+/* 验证码 */
+
+.captcha-wrap {
+    margin-left: 100px;
+}
+
+#captcha {
+    border: 1px solid #000;
 }
 
 /* 页脚 */
