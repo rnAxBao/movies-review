@@ -80,6 +80,7 @@ $(function () {
 
             /* 自动轮播 */
             let timer;
+            clearInterval(timer);
             timer = setInterval(slideNext, 5000);
             $(".screening").mouseover(function () {
                 clearInterval(timer);
@@ -114,11 +115,11 @@ $(function () {
                 let t = 0;
                 let b = $(".screening .ui-slide-content").position().left;
                 let c = -700 * slideIndex - b;
-                let d = 80;
+                let d = 50;
                 clearInterval(sliderTimer);
                 sliderTimer = setInterval(function () {
                     t++;
-                    if (t == 80) {
+                    if (t == 50) {
                         clearInterval(sliderTimer);
                     }
                     $(".screening .ui-slide-content").css("transform", "translateX(" + Tween.Cubic.easeOut(t, b, c, d) + "px)");
