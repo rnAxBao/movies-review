@@ -221,4 +221,55 @@ $(function () {
         });
     }
 
+    /* 验证码点击刷新 */
+    $(".changeCap").each(function () {
+        $(this).click(function () {
+            $(this).children(".captcha").prop("src", "pages/captcha.php?r=" + Math.random());
+        });
+    });
+
+
+    /* 注册框 */
+    let regUsername = addCheck($("#usernameInp"), /^[a-zA-Z0-9_]{4,16}$/, "请输入正确的用户名!");
+    let regPwd = addCheck($("#pwdInp"), /^[a-zA-Z0-9_]{4,16}$/, "请输入正确的密码!");
+    let regConfirmPwd = (function () {
+        $("#confirmpwd").change(function () {
+            if ($(this).val() == $("#pwdInp").val()) {
+                $(this).css("border-color", "green");
+                if ($(this).siblings(".error")) {
+                    $(this).siblings(".error").remove();
+                    return false;
+                }
+            } else {
+                $(this).css("border-color", "red");
+                $(this).parent().append($("<p>").addClass("error").text("两次密码输入不一致!"));
+                return true;
+            }
+        });
+    })();
+
+
+    /* 正则验证 */
+
+    function addCheck(ele, regCon, warnStr) {
+        ele.change(function () {
+            let con = $(this).val();
+            if (isReg(con, regCon)) {
+                $(this).css("border-color", "green");
+                if ($(this).siblings(".error")) {
+                    $(this).siblings(".error").remove();
+                    return false;
+                }
+            } else {
+                $(this).css("border-color", "red");
+                $(this).parent().append($("<p>").addClass("error").text(warnStr));
+                return true;
+            }
+        });
+    }
+
+    function isReg(str, regCon) {
+        let reg = regCon;
+        return reg.test(str);
+    }
 });

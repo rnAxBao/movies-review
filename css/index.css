@@ -30,25 +30,9 @@ li {
     padding: 0;
 }
 
-a:link {
-    color: #37a;
-    text-decoration: none;
-}
-
-a:visited {
-    color: #669;
-    text-decoration: none;
-}
-
-a:link {
-    color: #37a;
-    text-decoration: none;
-}
-
+a,
 a:hover {
-    color: #FFFFFF;
     text-decoration: none;
-    background: #37a;
 }
 
 .container {
@@ -414,12 +398,12 @@ a:hover {
 
 .con-right>div {
     display: none;
+    width: 300px;
     margin: 0 0 20px;
     padding: 16px 0 16px 18px;
     line-height: 1.5;
     background: #f2f7f6;
     border-radius: 4px;
-    width: 282px;
 }
 
 .con-right>div>h3 {
@@ -439,7 +423,19 @@ a:hover {
 
 .con-right .login {
     display: block;
-    width: 300px;
+}
+
+.con-right p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.con-right .error {
+    color: red;
+}
+
+.con-right .true {
+    color: green;
 }
 
 .form-horizontal .form-group {
@@ -449,6 +445,7 @@ a:hover {
 
 .form-control {
     width: 93%;
+    margin-bottom: 10px;
 }
 
 .form-control:focus {
@@ -466,11 +463,21 @@ a:hover {
 /* 验证码 */
 
 .captcha-wrap {
-    margin-left: 100px;
+    display: inline-block;
+    width: 40%;
 }
 
-#captcha {
+.captcha {
     border: 1px solid #000;
+    vertical-align: top;
+    margin-top: 1px;
+    margin-left: 64px;
+}
+
+/* 注册框 */
+#subReg {
+    margin-right: 0px;
+    width: 93%;
 }
 
 /* 页脚 */

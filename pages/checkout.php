@@ -2,9 +2,9 @@
 if(isset($_POST['authcode'])) {
     session_start();
     if (strtolower($_POST['authcode']) == $_SESSION['authcode']) {
-        echo "输入正确";
+        $json["errorcode"] = 0;
     }else {
-        echo "输入错误";
+        $json["errorcode"] = 1;
+        $json["msg"] = "验证码错误";
     }
-    exit();
 }
