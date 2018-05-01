@@ -92,7 +92,7 @@
 		<div class="con-right">
 			<div class="login">
 				<h3>登录</h3>
-				<form class="form-horizontal" action="pages/login.php" method="POST">
+				<form class="form-horizontal login-form" action="pages/login.php" method="POST">
 					<div class="form-group">
 						<label class="sr-only" for="username">用户名</label>
 						<input type="text" class="form-control" id="usernameInput" placeholder="用户名">
@@ -102,7 +102,7 @@
 						<input type="password" class="form-control" id="pwdInput" placeholder="密码">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control captcha-wrap" name="authcode" placeholder="请输入验证码">
+						<input type="text" class="form-control captcha-wrap" id="loginCaptcha" name="authcode" placeholder="请输入验证码">
 						<a class="changeCap" href="javascript:void(0)">
 							<img class="captcha" src="pages/captcha.php" alt="">
 						</a>
@@ -118,14 +118,14 @@
 			</div>
 			<div class="register">
 				<h3>注册</h3>
-				<form class="form-horizontal" action="pages/register.php" method="POST">
+				<form class="form-horizontal reg-form" action="pages/register.php" method="POST" onsubmit="return doReg();">
 					<div class="form-group">
 						<label class="sr-only" for="usernameInp">用户名</label>
-						<input type="text" class="form-control" id="usernameInp" placeholder="用户名">
+						<input type="text" class="form-control" id="usernameInp" name="usernameInp" placeholder="用户名">
 					</div>
 					<div class="form-group">
 						<label class="sr-only" for="pwdInp">密码</label>
-						<input type="password" class="form-control" id="pwdInp" placeholder="密码">
+						<input type="password" class="form-control" id="pwdInp" name="pwdInp" placeholder="密码">
 					</div>
 					<div class="form-group">
 						<label class="sr-only" for="confirmpwd">确认密码</label>
@@ -133,10 +133,10 @@
 					</div>
 					<div class="form-group">
 						<label class="sr-only" for="nickname">昵称</label>
-						<input type="text" class="form-control" id="nickname" placeholder="昵称">
+						<input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control captcha-wrap" name="authcode" placeholder="请输入验证码">
+						<input type="text" class="form-control captcha-wrap" id="regCaptcha" name="authcode" placeholder="请输入验证码">
 						<a class="changeCap" href="javascript:void(0)">
 							<img class="captcha" src="pages/captcha.php" alt="">
 						</a>
@@ -163,7 +163,7 @@
 	<script src="js/jquery.star-rating-svg.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="js/tween.js"></script>
-	<script src="js/index.js?ver=1.9"></script>
+	<script src="js/index.js?ver=2.16"></script>
 </body>
 
 </html>

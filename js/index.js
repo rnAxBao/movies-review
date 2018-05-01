@@ -222,6 +222,8 @@ $(function () {
         });
     }
 
+
+
     /* 验证码点击刷新 */
     $(".changeCap").each(function () {
         $(this).click(function () {
@@ -229,9 +231,20 @@ $(function () {
         });
     });
 
+    /* 按钮与登录注册框的交互 */
+    $(".login button[type=button], #register").each(function () {
+        $(this).click(function () {
+            $(".login").hide();
+            $(".register").slideDown();
+        });
+    });
+    $("#login").click(function () {
+        $(".register").hide();
+        $(".login").slideDown();
+    });
 
     /* 注册框 */
-    let regUsername = addCheck($("#usernameInp"), /^[a-zA-Z0-9_]{4,16}$/, "请输入正确的用户名!");
+    let regUsername = addCheck($("#usernameInp"), /^[a-zA-Z0-9_]{4,12}$/, "请输入正确的用户名!");
     let regPwd = addCheck($("#pwdInp"), /^[a-zA-Z0-9_]{4,16}$/, "请输入正确的密码!");
     let regConfirmPwd = (function () {
         $("#confirmpwd").change(function () {
@@ -248,6 +261,18 @@ $(function () {
             }
         });
     })();
+    let regNickName = addCheck($("#nickname"), /^[\u4e00-\u9fa5_a-zA-Z0-9]{1,6}$/, "请输入正确的昵称!");
+    let regCaptcha = addCheck($("#regCaptcha"), /^[a-zA-Z0-9]{4}$/, "请输入正确的验证码!");
+    function doReg() {
+        if (regUsername == true && regPwd == true && regConfirmPwd == true && regNickName == true && regCaptcha == true) {
+            console.log("!!");
+            console.log($(".register form").serializeArray());
+            // $.post("pages/register.php", $(".register form").serializeArray(), function (res) {
+            //     console.log(res);
+            // }, "json");
+        }
+        return false;
+    };
 
 
     /* 正则验证 */
