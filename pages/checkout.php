@@ -5,6 +5,6 @@ if(isset($_POST['authcode'])) {
         $json["errorcode"] = 0;
     }else {
         $json["errorcode"] = 1;
-        $json["msg"] = "验证码错误";
+        $json["msg"] = "验证码错误!";
     }
 }

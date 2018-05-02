@@ -475,10 +475,76 @@ a:hover {
 }
 
 /* 注册框 */
+
 #subReg {
     margin-right: 0px;
     width: 93%;
 }
+
+.notice {
+    width: 93%;
+    height: 30px;
+    line-height: 30px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    padding: 0 12px;
+    color: red;
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+    border-radius: 4px;
+}
+
+/* 用户信息 */
+
+.con-right .user-info {
+    padding-right: 18px;
+}
+
+.user-info .photo-wrap {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    margin: 0 auto;
+    border: 3px solid grey;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.user-info .show-name {
+    margin: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.user-info ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 1px solid lightgray;
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+.user-info li {
+    text-align: center;
+}
+
+.user-info li span {
+    display: block;
+    font-weight: 300;
+}
+
+.user-info #userLogout {
+    display: block;
+    width: 93%;
+    margin: 20px auto 0;
+}
+
 
 /* 页脚 */
 
