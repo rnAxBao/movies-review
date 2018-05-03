@@ -1,0 +1,66 @@
+h1 {
+    word-wrap: break-word;
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+    color: #494949;
+    margin: 0;
+    padding: 0 0 15px 0;
+    line-height: 1.1;
+}
+
+/* 电影信息 */
+
+.con-left h1 {
+    font-size: 26px;
+}
+
+h1 .year {
+    color: #888;
+}
+
+.subject-wrap {
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.subject {
+    float: left;
+    width: 500px;
+}
+
+.subject .mainpic {
+    margin-right: 15px;
+}
+
+.mainpic {
+    margin: 3px 0 0 0;
+    float: left;
+    text-align: center;
+    margin: 3px 12px 0 0;
+    max-width: 155px;
+    overflow: hidden;
+}
+
+.mainpic img {
+    max-width: 135px;
+    margin-bottom: 10px;
+}
+
+.subject-info {
+    float: left;
+    max-width: 333px;
+    padding: 5px 10px;
+    word-wrap: break-word;
+}
+
+.subject-info li {
+    margin-bottom: 5px;
+    font-size: 13px;
+    line-height: 150%;
+    color: #666666;
+}
+
+.subject-info li span {
+    color: #111;
+}

@@ -1,0 +1,237 @@
+/* 样式重置 */
+
+html {
+    color: #111;
+    background: #fff;
+}
+
+body {
+    font-size: 12px;
+    line-height: 1.62;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "MicrosoftYaHei", "WenQuanYi Micro Hei", sans-serif;
+    ;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
+.container {
+    width: 1080px !important;
+}
+
+/* 顶部用户功能栏 */
+
+.container {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.top-nav {
+    width: 100%;
+    height: 28px;
+    color: #d5d5d5;
+    background-color: #545652;
+}
+
+.user-menu {
+    float: right;
+}
+
+.user-menu li {
+    float: left;
+    padding: 0 5px;
+    margin-right: 5px;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.user-menu li:nth-child(3),
+.user-menu li:nth-child(4) {
+    display: none;
+}
+
+/* 内容区 */
+
+.con-left {
+    float: left;
+    width: 730px;
+    padding-right: 40px;
+}
+
+.con-right {
+    float: right;
+    width: 310px;
+}
+
+/* 内容右侧 */
+
+.con-right>div {
+    display: none;
+    width: 300px;
+    margin: 0 0 20px;
+    padding: 16px 0 16px 18px;
+    line-height: 1.5;
+    background: #f2f7f6;
+    border-radius: 4px;
+}
+
+.con-right>div>h3 {
+    margin-top: 10px;
+    color: #072;
+    font-size: 16px;
+}
+
+.con-right>div .btn {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.con-right>div button[type=submit] {
+    margin-right: 38px;
+}
+
+.con-right .login {
+    display: block;
+}
+
+.con-right p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.con-right .error {
+    color: red;
+}
+
+.con-right .true {
+    color: green;
+}
+
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.form-control {
+    width: 93%;
+    margin-bottom: 10px;
+}
+
+.form-control:focus {
+    border-color: #ccc;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.form-horizontal .checkbox {
+    padding-top: 0;
+    margin-bottom: 10px;
+}
+
+/* 验证码 */
+
+.captcha-wrap {
+    display: inline-block;
+    width: 40%;
+}
+
+.captcha {
+    border: 1px solid #000;
+    vertical-align: top;
+    margin-top: 1px;
+    margin-left: 64px;
+}
+
+/* 注册框 */
+
+#subReg {
+    margin-right: 0px;
+    width: 93%;
+}
+
+.notice {
+    width: 93%;
+    height: 30px;
+    line-height: 30px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    padding: 0 12px;
+    color: red;
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+    border-radius: 4px;
+}
+
+/* 用户信息 */
+
+.con-right .user-info {
+    padding-right: 18px;
+}
+
+.user-info .photo-wrap {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    margin: 0 auto;
+    border: 3px solid grey;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.user-info .show-name {
+    margin: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.user-info ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 1px solid lightgray;
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+.user-info li {
+    text-align: center;
+}
+
+.user-info li span {
+    display: block;
+    font-weight: 300;
+}
+
+.user-info #userLogout {
+    display: block;
+    width: 93%;
+    margin: 20px auto 0;
+}

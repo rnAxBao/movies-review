@@ -1,0 +1,69 @@
+<div class="login">
+    <h3>登录</h3>
+    <form class="form-horizontal login-form" onsubmit="return doLogin();">
+        <div class="form-group">
+            <label class="sr-only" for="username">用户名</label>
+            <input type="text" class="form-control" id="usernameInput" name="username" placeholder="用户名">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="pwdInput">密码</label>
+            <input type="password" class="form-control" id="pwdInput" name="password" placeholder="密码">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control captcha-wrap" id="loginCaptcha" name="authcode" placeholder="请输入验证码">
+            <a class="changeCap" href="javascript:void(0)">
+                <img class="captcha" src="" alt="">
+            </a>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="rememberMe">记住我
+            </label>
+        </div>
+        <button type="submit" class="btn btn-success" id="subLogin">登录</button>
+        <button type="button" class="btn btn-info">注册</button>
+    </form>
+</div>
+<div class="register">
+    <h3>注册</h3>
+    <form class="form-horizontal reg-form" onsubmit="return doReg();">
+        <div class="form-group">
+            <label class="sr-only" for="usernameInp">用户名</label>
+            <input type="text" class="form-control" id="usernameInp" name="usernameInp" placeholder="用户名">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="pwdInp">密码</label>
+            <input type="password" class="form-control" id="pwdInp" name="pwdInp" placeholder="密码">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="confirmpwd">确认密码</label>
+            <input type="password" class="form-control" id="confirmpwd" placeholder="确认密码">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="nickname">昵称</label>
+            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control captcha-wrap" id="regCaptcha" name="authcode" placeholder="请输入验证码">
+            <a class="changeCap" href="javascript:void(0)">
+                <img class="captcha" src="" alt="">
+            </a>
+        </div>
+        <button type="submit" class="btn btn-info" id="subReg">注册</button>
+    </form>
+</div>
+<div class="user-info">
+    <div class="photo-wrap">
+        <img src="" alt="">
+    </div>
+    <p class="show-name"></p>
+    <ul>
+        <li>用户名
+            <span class="show-username"></span>
+        </li>
+        <li>用户类型
+            <span class="show-type"></span>
+        </li>
+    </ul>
+    <button type="button" class="btn btn-danger" id="userLogout">退出</button>
+</div>

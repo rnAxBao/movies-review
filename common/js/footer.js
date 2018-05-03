@@ -1,0 +1,1 @@
+$(".footer").load(location.pathname.indexOf("/pages") > -1 ? "../common/pages/footer.html" : "common/pages/footer.html");
