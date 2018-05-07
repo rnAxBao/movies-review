@@ -1,0 +1,98 @@
+/* 电影列表 */
+
+.movie-class {
+    margin-bottom: 20px;
+}
+
+.movie-list {
+    letter-spacing: -0.31em;
+    margin-left: -26px;
+}
+
+.movie-list .list-item {
+    display: inline-block;
+    vertical-align: top;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-align: center;
+    width: 115px;
+    margin: 0 0 32px 25px;
+    overflow: hidden;
+}
+
+.poster {
+    height: 161px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.title {
+    letter-spacing: -0.31em;
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 22px;
+    overflow: hidden;
+}
+
+.title a {
+    display: inline-block;
+    vertical-align: top;
+    letter-spacing: normal;
+    word-spacing: normal;
+    height: 24px;
+    line-height: 24px;
+    color: #333;
+}
+
+.rating {
+    display: inline-block;
+    zoom: 1;
+    margin: 4px auto 2px;
+    height: 19px;
+}
+
+.rating span {
+    float: left;
+}
+
+.subject-rate {
+    color: #e09015;
+    font-size: 12px;
+    margin-left: 2px;
+}
+
+.ticket_btn span {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 90px;
+    height: 24px;
+    color: #fff;
+    border-radius: 2px;
+    line-height: 22px;
+    border: 1px solid #d9d9d9;
+    background: #F3F3F3;
+    background: -moz-linear-gradient(top, #F3F3F3, #ECECEC);
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#F3F3F3), to(#ECECEC));
+    background: -o-linear-gradient(top, #F3F3F3, #ECECEC);
+}
+
+.ticket_btn a:link,
+.ticket_btn a:visited,
+.ticket_btn a:active {
+    background: none;
+    color: #494949;
+}
+
+.ticket_btn span:hover {
+    background: #EBEBEB;
+}
+
+/* 电影分类为空的提示 */
+.movie-empty {
+    height: 300px;
+    line-height: 300px;
+    text-align: center;
+    font-size: 14px;
+}

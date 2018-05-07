@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../common/css/user-function.css?ver=0.3">
     <link rel="stylesheet" href="../common/css/search-bar.css?ver=0.4">
     <link rel="stylesheet" href="../common/css/footer.css">
-    <link rel="stylesheet" href="../css/movie.css">
+    <link rel="stylesheet" href="../css/movie.css?ver=0.4">
     <title>Document</title>
 
 </head>
@@ -26,35 +26,66 @@
     <div class="movie-lib container">
         <div class="con-left">
             <h1>
-                <span>清水里的刀子</span>
-                <span class="year">(2016)</span>
+                <span class="moviename"></span>
+                <span class="year"></span>
             </h1>
             <div class="subject-wrap">
                 <div class="subject">
                     <div class="mainpic">
-                        <img src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2516999755.webp" alt="">
+                        <img src="" alt="">
                     </div>
                     <div class="subject-info">
                         <ul>
                             <li>导演:
-                                <span class="directors">王学博</span>
+                                <span class="directors"></span>
                             </li>
                             <li>主演:
-                                <span class="actors">杨生仓</span>
+                                <span class="actors"></span>
                             </li>
                             <li>类型:
-                                <span class="genre">剧情</span>
+                                <span class="genre"></span>
                             </li>
                             <li>制片国家/地区:
-                                <span class="countries">中国大陆</span>
+                                <span class="countries"></span>
                             </li>
                             <li>又名:
-                                <span class="aka">Knife in the Clear Water</span>
+                                <span class="aka"></span>
                             </li>
                         </ul>
+                        <button type="button" class="btn btn-primary" id="addToMy">加入我的影库</button>
                     </div>
                 </div>
-                <div class="douban-rating"></div>
+                <div class="douban-rating">
+                    <div class="rating-head">豆瓣评分</div>
+                    <div class="rating-body">
+                        <div class="rating-left">
+                            <strong></strong>
+                        </div>
+                        <div class="rating-right">
+                            <div class="movie-rating">
+
+                            </div>
+                            <div class="rating-count"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-info">
+                <h2>
+                    <span class="moviename"></span>的剧情简介 · · · · · ·</h2>
+                <p></p>
+            </div>
+            <div class="movie-comment">
+                <div class="comment-head">
+                    <h2>
+                        <span class="moviename"></span>的影评 · · · · · ·</h2>
+                    <a href="javascript:void(0);" id="addComment">
+                        <span>我要写影评</span>
+                    </a>
+                </div>
+                <div class="comment-body">
+                    
+                </div>
             </div>
         </div>
         <div class="con-right">
@@ -70,9 +101,10 @@
     <script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
     <script src="../js/jquery.star-rating-svg.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="../common/js/user-function.js?ver=0.5"></script>
+    <script src="../common/js/user-function.js?ver=0.8"></script>
     <script src="../common/js/search-bar.js?ver=0.7"></script>
     <script src="../common/js/footer.js"></script>
+    <script src="../js/movie.js?ver=0.5"></script>
 </body>
 
 </html>
