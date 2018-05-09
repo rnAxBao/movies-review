@@ -123,12 +123,12 @@ $(function () {
         let html = `
                 <ul>
 					<li class="poster">
-						<a href="pages/movie.html?movie_id=${movieId}" target="_blank">
+						<a href="pages/douban-movie.html?movie_id=${movieId}" target="_blank">
 						    <img class="lazy" data-original=${moviePic} alt=${movieName} width="128" height="179">
 						</a>
 					</li>
 					<li class="title">
-					    <a href="pages/movie.html?movie_id=${movieId}" target="_blank">${movieName}</a>
+					    <a href="pages/douban-movie.html?movie_id=${movieId}" target="_blank">${movieName}</a>
 					</li>
 					<li class="rating">
 					    <span class="rating-star"></span>
@@ -136,7 +136,7 @@ $(function () {
 					</li>
 					<li class="ticket_btn">
 					    <span>
-					    	<a href="pages/movie.html?movie_id=${movieId}" target="_blank">查看详情</a>
+					    	<a href="pages/douban-movie.html?movie_id=${movieId}" target="_blank">查看详情</a>
 						</span>
 					</li>
                 </ul>`;

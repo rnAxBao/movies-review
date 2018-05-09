@@ -1,33 +1,43 @@
 <?php
 include "../connect.php";
-$type = "";
-switch ($_GET['type']) {
-    case '剧情':
-        $type = "剧情";
-        break;
-    case '动作':
-        $type = "动作";
-        break;
-    case '科幻':
-        $type = "科幻";
-        break;
-    case '犯罪':
-        $type = "犯罪";
-        break;
-    case '惊悚':
-        $type = "惊悚";
-        break;
-    case '战争':
-        $type = "战争";
-        break;
-    case '动画':
-        $type = "动画";
-        break;
-    default:
-        break;
-}
-$sql = "select * from movies where movie_type like '%{$type}%'";
 
+if(empty($_GET)) {
+    $json["errorcode"] = 1;
+    $json["msg"] = "请求不到的数据!";
+    die(json_encode($json));
+}
+if (!empty($_GET['type'])) {
+    $type = "";
+    switch ($_GET['type']) {
+        case '剧情':
+            $type = "剧情";
+            break;
+        case '动作':
+            $type = "动作";
+            break;
+        case '科幻':
+            $type = "科幻";
+            break;
+        case '犯罪':
+            $type = "犯罪";
+            break;
+        case '惊悚':
+            $type = "惊悚";
+            break;
+        case '战争':
+            $type = "战争";
+            break;
+        case '动画':
+            $type = "动画";
+            break;
+        default:
+            break;
+    }
+    $sql = "select * from movies where movie_type like '%{$type}%' ORDER BY movie_id DESC";
+} else if(!empty($_GET['movieId'])) {
+    $movieId = $_GET['movieId'];
+    $sql = "select * from movies where movie_id = '{$movieId}'";
+}
 $result = $mysql->query($sql);
 if ($result) {
     $data = $result->fetch_all();
@@ -51,7 +61,7 @@ if ($result) {
             ];
         }
     } else {
-        $json['msg'] = "抱歉!该分类下暂时没有影片,请联系站长添加!";
+        $json['msg'] = "未查找到电影信息";
     }
 } else {
     $json['errorcode'] = 1;

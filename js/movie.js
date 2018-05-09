@@ -1,79 +1,53 @@
 $(function () {
     let movieId = location.search.split("=")[1];
-    $.ajax({
-        url: "https://api.douban.com/v2/movie/" + movieId,
-        type: "get",
-        dataType: "jsonp",
-        success: function (res) {
-            let data = res;
-            /* 电影信息 */
-            $("title").text(data.attrs.title[0]);
-            $(".con-left .moviename").text(data.attrs.title[0]);
-            $(".con-left h1 span").eq(1).text("(" + data.attrs.year[0] + ")");
-            $(".subject .mainpic img").prop("src", data.image);
-            $(".subject .subject-info .directors").text(data.attrs.director[0].split(" ")[0]);
-            let cast = "";
-            for (let i = 0; i < data.attrs.cast.length; i++) {
-                cast += data.attrs.cast[i].split(" ")[0];
-                if (i < (data.attrs.cast.length) - 1) {
-                    cast += " / ";
-                }
-            }
-            $(".subject .subject-info .actors").text(cast);
-            let movie_type = data.attrs.movie_type.join("/");
-            $(".subject .subject-info .genre").text(movie_type);
-            let country = data.attrs.country.join("/")
-            $(".subject .subject-info .countries").text(country);
-            $(".subject .subject-info .aka").text(data.alt_title);
-
-            /* 豆瓣评分 */
-            $(".rating-left strong").text(data.rating.average);
-            $(".movie-rating").starRating({
-                initialRating: (data.rating.average / 10 * 5).toFixed(1),
-                starSize: 15,
-                readOnly: true,
-                useGradient: false,
-                activeColor: "orange"
-            });
-            $(".douban-rating .rating-count").text(data.rating.numRaters + "评价");
-
-            /* 加入我的影库 */
-            $("#addToMy").click(function () {
-                $.post("addMovie.php", {
-                    movie_id: movieId,
-                    title: data.title,
-                    summary: data.summary,
-                    rating: data.rating,
-                    alt_title: data.alt_title,
-                    image: data.image,
-                    attrs: {
-                        country: data.attrs.country,
-                        director: data.attrs.director,
-                        cast: data.attrs.cast,
-                        year: data.attrs.year,
-                        movie_type: data.attrs.movie_type
-                    }
-                }, function (res) {
-                    if (res.errorcode == 0) {
-                        alert(res.msg);
-                        location.href = "my-movies.html";
-                    } else {
-                        alert(res.msg);
-                    }
-                }, "json");
-            })
-
-            /* 电影简介 */
-            $(".movie-info p").text(data.summary);
+    $.getJSON("getMovies.php", {
+        'movieId': movieId
+    }, function (res) {
+        let data = res;
+        /* 电影信息 */
+        /* 进口电影显示中文名及外文名 */
+        if (isReg(data.datas[0].title, /^[\u4e00-\u9fa5]$/)) {
+            $("title, .con-left .moviename").text(data.datas[0].title);
+            $(".subject .subject-info .aka").text(data.datas[0].aka);
+        } else {
+            let nameArr =  data.datas[0].aka.split(" / ");
+            $("title, .con-left .moviename").text(nameArr[0]);
+            $(".con-left>h1>.moviename").text(nameArr[0] + " " + data.datas[0].title);
+            let newAka = data.datas[0].aka.split(nameArr[0] + " / ")[1];
+            $(".subject .subject-info .aka").text(newAka);
         }
+        $(".con-left h1 span").eq(1).text("(" + data.datas[0].year + ")");
+        $(".subject .mainpic img").prop("src", data.datas[0].image);
+        $(".subject .subject-info .directors").text(data.datas[0].director);
+        $(".subject .subject-info .actors").text(data.datas[0].cast);
+        $(".subject .subject-info .genre").text(data.datas[0].type);
+        $(".subject .subject-info .countries").text(data.datas[0].country);
+
+        /* 豆瓣评分 */
+        $(".rating-left strong").text(data.datas[0].score);
+        $(".movie-rating").starRating({
+            initialRating: (data.datas[0].score / 10 * 5).toFixed(1),
+            starSize: 15,
+            readOnly: true,
+            useGradient: false,
+            activeColor: "orange"
+        });
+        $(".douban-rating .rating-count").text(data.datas[0].count + "评价");
+
+        /* 电影简介 */
+        $(".movie-info p").text(data.datas[0].summary);
     });
 
     /* 获取评论 */
 
     $.getJSON("getComment.php", {
         'movieId': movieId
-    }, function(data) {
+    }, function (data) {
         let res = data;
+        if (!res.datas) {
+            $(".comment-body").append($("<div>").addClass("comment-empty").text(res.msg));
+            return;
+        }
         for (let i = 0; i < res.datas.length; i++) {
             let name = res.datas[i].name;
             let headpic = name == "包包大人" ? "../img/admin.JPG" : "../img/default_head.png";
@@ -88,6 +62,7 @@ $(function () {
                             <span class="commenter">${name}</span>
                             <span class="user-rating"></span>
                             <span class="item-datetime">${datetime}</span>
+                            <button type="button" class="btn btn-danger delete-comment">删除</button>
                         </div>
                         <div class="item-main">
                             <p>${commentCon}</p>
@@ -106,29 +81,53 @@ $(function () {
                         </div>
                     </div>`;
             $(".comment-body").append(html);
-            $(".comment-item .user-rating").starRating({
+            $(".comment-item:eq(" + i + ") .user-rating").starRating({
                 initialRating: score,
                 starSize: 12,
                 readOnly: true,
                 useGradient: false,
                 activeColor: "orange"
             });
-            $(".comment-item .unfold").click(function () {
+            $(".comment-item:eq(" + i + ") .unfold").click(function () {
                 $(this).siblings("p").css({
                     overflow: "visible",
                     display: "block"
                 });
                 $(this).hide();
-                $(".comment-item .fold").show();
+                $(".comment-item:eq(" + i + ") .fold").show();
             });
-            $(".comment-item .fold").click(function () {
+            $(".comment-item:eq(" + i + ") .fold").click(function () {
                 $(".item-main p").css({
                     overflow: "hidden",
                     display: "-webkit-box"
                 });
                 $(this).hide();
-                $(".comment-item .unfold").show();
+                $(".comment-item:eq(" + i + ") .unfold").show();
             });
+            if (sessionStorage.getItem("type") == 0) {
+                $(".comment-item:eq(" + i + ") .delete-comment").slideDown();
+            }
+            /* 管理员删除评论 */
+            $(".comment-item:eq(" + i + ") .delete-comment").click(function () {
+                let that = $(this);
+                $.getJSON("deleteComment.php", {
+                    'movieId': movieId,
+                    'name': name,
+                    'time': datetime
+                }, function (res) {
+                    console.log(res);
+                    if (res.errorcode == 0) {
+                        that.parent().parent().slideUp(500, function() {
+                            $(this).remove()
+                        });
+                    } else {
+                        alert("无法删除");
+                    }
+                });
+            });
+        }
+        if (sessionStorage.getItem("type") == 0) {
+            $(".delete-comment").slideDown();
         }
     });
 
@@ -165,15 +164,15 @@ $(function () {
                     $(ele).data("score", rating);
                 }
             });
-            $("#subComment").click(function() {
-                if($("#rating").data("score") && $("#comment").val()) {
+            $("#subComment").click(function () {
+                if ($("#rating").data("score") && $("#comment").val()) {
                     $(".error").remove();
                     $.post("addComment.php", {
                         'movieId': movieId,
                         'username': sessionStorage.getItem("name"),
                         'score': $("#rating").data("score"),
                         'comment': $("#comment").val()
-                    }, function(res) {
+                    }, function (res) {
                         if (res.errorcode == 0) {
                             location.reload();
                         } else {
@@ -195,3 +194,8 @@ $(function () {
         }
     });
 });
+
+function isReg(str, regCon) {
+    let reg = regCon;
+    return reg.test(str);
+}

@@ -1,4 +1,5 @@
 $(function () {
+    /* 获取电影 */
     getMovies();
     $(".movie-class .nav-tabs li a").each(function () {
         $(this).click(function () {
@@ -9,12 +10,25 @@ $(function () {
         });
     });
 
+    /* 管理员功能: 编辑电影 */
+    if (sessionStorage.getItem("type") == 0) {
+        $("#editMovie").fadeIn();
+    }
+    $("#editMovie").click(function() {
+        if (!$(this).data("statu")) {
+            $(".movie-list .deleteIt").fadeIn();
+            $(this).data("statu", "on");
+        } else {
+            $(".movie-list .deleteIt").fadeOut();
+            $(this).removeData("statu");
+        }
+    });
+
     function getMovies() {
         $.getJSON("getMovies.php", {
             type: $(".movie-class .active a").text()
         }, function (data) {
             let res = data;
-            console.log(res);
             if(res.datas) {
                 for (let i = 0; i < res.datas.length; i++) {
                     let li = $('<li class="list-item"></li>');
@@ -27,7 +41,7 @@ $(function () {
                 }
             } else {
                 $(".movie-main .movie-empty").remove();
-                $(".movie-main").append($("<div>").addClass("movie-empty").text(res.msg));
+                $(".movie-main").append($("<div>").addClass("movie-empty").text("抱歉!该分类下暂时没有影片,请联系站长添加!"));
             }
         });
     }
@@ -37,7 +51,12 @@ $(function () {
     function addMovieItem(faEle, sonEle, data, index, fun) {
         let movieId = data.datas[index].movieId;
         let moviePic = data.datas[index].image;
-        let movieName = data.datas[index].title;
+        let movieName = "";
+        if (isReg(data.datas[index].title, /^[\u4e00-\u9fa5]$/)) {
+            movieName = data.datas[index].title;
+        } else {
+            movieName = data.datas[index].aka.split(" / ")[0];
+        }
         let movieRating = data.datas[index].score;
         let html = `
                 <ul>
@@ -58,8 +77,25 @@ $(function () {
 					    	<a href="movie.html?movie_id=${movieId}" target="_blank">查看详情</a>
 						</span>
 					</li>
-                </ul>`;
+                </ul>
+                <button type="button" class="btn btn-danger deleteIt">&times;</button>`;
         faEle.append(sonEle.attr("data-id", movieId).append(html));
+
+        /* 管理员删除电影 */
+        sonEle.find(".deleteIt").click(function() {
+            let that = $(this);
+            $.getJSON("deleteMovie.php", {
+                'movieId': movieId,
+            }, function(res) {
+                if(res.errorcode == 0) {
+                    that.parent().fadeOut(500, function() {
+                        $(this).remove();
+                    })
+                } else {
+                    alert(res.msg);
+                }
+            });
+        });
 
         /* 使用评分插件 */
         if (movieRating != 0) {
@@ -78,3 +114,8 @@ $(function () {
         }
     }
 });
+
+function isReg(str, regCon) {
+    let reg = regCon;
+    return reg.test(str);
+}

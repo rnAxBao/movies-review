@@ -1,20 +1,14 @@
-$(".top-nav").load(location.pathname.indexOf("/pages") > -1 ? "../common/pages/top-bar.html" : "common/pages/top-bar.html", function() {
-    $(".con-right").load(location.pathname.indexOf("/pages") > -1 ? "../common/pages/user-part.html" : "common/pages/user-part.html", function() {
+$(".top-nav").load(location.pathname.indexOf("/pages") > -1 ? "../common/pages/top-bar.html" : "common/pages/top-bar.html", function () {
+    $(".con-right").load(location.pathname.indexOf("/pages") > -1 ? "../common/pages/user-part.html" : "common/pages/user-part.html", function () {
         /* 保持登录状态 */
         if (sessionStorage.getItem("username") && sessionStorage.getItem("name") && sessionStorage.getItem("type")) {
             showUser();
         }
         /* 按钮与登录注册框的交互 */
         $(".login button[type=button], #register").each(function () {
-            $(this).click(function () {
-                $(".login").hide();
-                $(".register").slideDown();
-            });
+            $(this).click(showRegister);
         });
-        $("#login").click(function () {
-            $(".register").hide();
-            $(".login").slideDown();
-        });
+        $("#login").click(showLogin);
 
         /* 退出登录 */
         $("#logout, #userLogout").click(function () {
@@ -23,6 +17,7 @@ $(".top-nav").load(location.pathname.indexOf("/pages") > -1 ? "../common/pages/t
             sessionStorage.removeItem("username");
             sessionStorage.removeItem("name");
             sessionStorage.removeItem("type");
+            location.reload();
         });
 
         // 记住我
@@ -91,6 +86,16 @@ $(".top-nav").load(location.pathname.indexOf("/pages") > -1 ? "../common/pages/t
     });
 });
 
+function showRegister() {
+    $(".login").hide();
+    $(".register").slideDown();
+}
+
+function showLogin() {
+    $(".register").hide();
+    $(".login").slideDown();
+}
+
 function showUser() {
     $(".login, #login, #register").hide();
     /* 登录成功后显示用户信息 */
@@ -125,37 +130,37 @@ function doLogin() {
     let logCaptcha = isGreen($("#loginCaptcha"));
     if (logCaptcha) {
         $.post(location.pathname.indexOf("/pages") > -1 ? "login.php" : "pages/login.php", $(".login form").serializeArray(),
-                function (res) {
-            $(".login form").children(".notice").remove();
-            if (res.errorcode == 0) {
-                /* 记住我 */
-                if ($("#rememberMe").prop("checked")) {
-                    $.cookie("username", $("#usernameInput").val(), {
-                        expires: 7
-                    });
-                    $.cookie("password", $("#pwdInput").val(), {
-                        expires: 7
-                    });
-                } else {
-                    $.cookie("username", null, {
-                        expires: 7
-                    });
-                    $.cookie("password", null, {
-                        expires: 7
-                    });
-                }
-                /* 保持用户登录状态 */
-                sessionStorage.setItem("username", res.data.username);
-                sessionStorage.setItem("name", res.data.name);
-                sessionStorage.setItem("type", res.data.type);
-                $(".login #loginCaptcha").css("border-color", "#ccc");
-                $(".login form")[0].reset();
-                showUser();
-            } else {
+            function (res) {
                 $(".login form").children(".notice").remove();
-                $(".login #subLogin").before($("<div>").addClass("notice").text(res.msg));
-            }
-        }, "json");
+                if (res.errorcode == 0) {
+                    /* 记住我 */
+                    if ($("#rememberMe").prop("checked")) {
+                        $.cookie("username", $("#usernameInput").val(), {
+                            expires: 7
+                        });
+                        $.cookie("password", $("#pwdInput").val(), {
+                            expires: 7
+                        });
+                    } else {
+                        $.cookie("username", null, {
+                            expires: 7
+                        });
+                        $.cookie("password", null, {
+                            expires: 7
+                        });
+                    }
+                    /* 保持用户登录状态 */
+                    sessionStorage.setItem("username", res.data.username);
+                    sessionStorage.setItem("name", res.data.name);
+                    sessionStorage.setItem("type", res.data.type);
+                    $(".login #loginCaptcha").css("border-color", "#ccc");
+                    $(".login form")[0].reset();
+                    location.reload();
+                } else {
+                    $(".login form").children(".notice").remove();
+                    $(".login #subLogin").before($("<div>").addClass("notice").text(res.msg));
+                }
+            }, "json");
     } else {
         $(".login form").children(".notice").remove();
         $(".login #subLogin").before($("<div>").addClass("notice").text("请填写空字段!"));
@@ -176,6 +181,7 @@ function doReg() {
             if (res.errorcode == 0) {
                 $(".register #subReg").before($("<div>").addClass("notice").css("color", "green").text(res.msg));
                 $(".register form")[0].reset();
+                setTimeout(showLogin, 1000);
             } else {
                 $(".register #subReg").before($("<div>").addClass("notice").text(res.msg));
             }

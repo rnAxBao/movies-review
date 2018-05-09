@@ -1,7 +1,15 @@
 /* 电影列表 */
 
 .movie-class {
+    position: relative;
     margin-bottom: 20px;
+}
+
+.movie-class #editMovie {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .movie-list {
@@ -10,6 +18,7 @@
 }
 
 .movie-list .list-item {
+    position: relative;
     display: inline-block;
     vertical-align: top;
     letter-spacing: normal;
@@ -17,6 +26,20 @@
     text-align: center;
     width: 115px;
     margin: 0 0 32px 25px;
+}
+
+.movie-list .list-item .deleteIt {
+    display: none;
+    position: absolute;
+    left: -8.5px;
+    top: -8.5px;
+    width: 17px;
+    height: 17px;
+    padding: 0;
+    border-radius: 50%;
+    line-height: 0px;
+    font-size: 15px;
+    text-align: center;
     overflow: hidden;
 }
 
