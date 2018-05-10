@@ -50,7 +50,7 @@ $(function () {
         }
         for (let i = 0; i < res.datas.length; i++) {
             let name = res.datas[i].name;
-            let headpic = name == "包包大人" ? "../img/admin.JPG" : "../img/default_head.png";
+            let headpic = name == "包包大人" ? "../img/admin.jpg" : "../img/default_head.png";
             let datetime = res.datas[i].datetime;
             let commentCon = res.datas[i].comment;
             let score = res.datas[i].score;
