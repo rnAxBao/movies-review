@@ -10,7 +10,7 @@ $(function () {
             $("title, .con-left .moviename").text(data.datas[0].title);
             $(".subject .subject-info .aka").text(data.datas[0].aka);
         } else {
-            let nameArr =  data.datas[0].aka.split(" / ");
+            let nameArr = data.datas[0].aka.split(" / ");
             $("title, .con-left .moviename").text(nameArr[0]);
             $(".con-left>h1>.moviename").text(nameArr[0] + " " + data.datas[0].title);
             let newAka = data.datas[0].aka.split(nameArr[0] + " / ")[1];
@@ -71,11 +71,11 @@ $(function () {
                         <div class="item-action">
                             <a href="javascript:void(0);" class="action-btn up" title="有用">
                                 <img src="https://img3.doubanio.com/f/zerkalo/536fd337139250b5fb3cf9e79cb65c6193f8b20b/pics/up.png">
-                                <span id="r-useful_count-9283541">${agree}</span>
+                                <span>${agree}</span>
                             </a>
                             <a href="javascript:void(0);" class="action-btn down" title="没用">
                                 <img src="https://img3.doubanio.com/f/zerkalo/68849027911140623cf338c9845893c4566db851/pics/down.png">
-                                <span id="r-useless_count-9283541">${disagree}</span>
+                                <span>${disagree}</span>
                             </a>
                             <a href="javascript:void(0);" class="fold">收起</a>
                         </div>
@@ -104,10 +104,39 @@ $(function () {
                 $(this).hide();
                 $(".comment-item:eq(" + i + ") .unfold").show();
             });
+            /* 顶或踩评论 */
+            $(".comment-item:eq(" + i + ") .item-action .up").click(function () {
+                let agreeNum = agree - 0;
+                if (!$(this).data("status")) {
+                    $(this).data("status", "on");
+                    $(this).children("img").prop("src", "https://img3.doubanio.com/f/zerkalo/635290bb14771c97270037be21ad50514d57acc3/pics/up-full.png");
+                    rateComment(movieId, name, datetime, 0, agreeNum + 1);
+                    $(this).children("span").text(agreeNum + 1);
+                } else {
+                    $(this).removeData("status");
+                    $(this).children("img").prop("src", "https://img3.doubanio.com/f/zerkalo/536fd337139250b5fb3cf9e79cb65c6193f8b20b/pics/up.png");
+                    rateComment(movieId, name, datetime, 0, agreeNum);
+                    $(this).children("span").text(agreeNum);
+                }
+            });
+            $(".comment-item:eq(" + i + ") .item-action .down").click(function () {
+                let disagreeNum = disagree - 0;
+                if (!$(this).data("status")) {
+                    $(this).data("status", "on");
+                    $(this).children("img").prop("src", "https://img3.doubanio.com/f/zerkalo/23cee7343568ca814238f5ef18bf8aadbe959df2/pics/down-full.png");
+                    rateComment(movieId, name, datetime, 1, disagreeNum + 1);
+                    $(this).children("span").text(disagreeNum + 1);
+                } else {
+                    $(this).removeData("status");
+                    $(this).children("img").prop("src", "https://img3.doubanio.com/f/zerkalo/68849027911140623cf338c9845893c4566db851/pics/down.png");
+                    rateComment(movieId, name, datetime, 1, disagreeNum);
+                    $(this).children("span").text(disagreeNum);
+                }
+            });
+            /* 管理员删除评论 */
             if (sessionStorage.getItem("type") == 0) {
                 $(".comment-item:eq(" + i + ") .delete-comment").slideDown();
             }
-            /* 管理员删除评论 */
             $(".comment-item:eq(" + i + ") .delete-comment").click(function () {
                 let that = $(this);
                 $.getJSON("deleteComment.php", {
@@ -115,9 +144,8 @@ $(function () {
                     'name': name,
                     'time': datetime
                 }, function (res) {
-                    console.log(res);
                     if (res.errorcode == 0) {
-                        that.parent().parent().slideUp(500, function() {
+                        that.parent().parent().slideUp(500, function () {
                             $(this).remove()
                         });
                     } else {
@@ -194,3 +222,13 @@ $(function () {
         }
     });
 });
+
+function rateComment(movieId, name, datetime, type, rate) {
+    $.post("rateComment.php", {
+        'movieId': movieId,
+        'name': name,
+        'time': datetime,
+        'type': type,
+        'rate': rate
+    }, "json");
+}

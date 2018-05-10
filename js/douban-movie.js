@@ -81,8 +81,3 @@ $(function () {
         }
     });
 });
-
-function isReg(str, regCon) {
-    let reg = regCon;
-    return reg.test(str);
-}

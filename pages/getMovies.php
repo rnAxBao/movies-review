@@ -1,6 +1,6 @@
 <?php
 include "../connect.php";
-
+define("PAGE_SIZE", 15);
 if(empty($_GET)) {
     $json["errorcode"] = 1;
     $json["msg"] = "请求不到的数据!";
@@ -33,7 +33,16 @@ if (!empty($_GET['type'])) {
         default:
             break;
     }
+    $pageIndex = $_GET['pageIndex'];
+    $countSql = "select count(movie_id) from movies where movie_type like '%{$type}%'";
+    $countResult = $mysql->query($countSql);
+    $count = $countResult->fetch_array(MYSQLI_NUM);
+    $totalItems = $count[0];//count(id) 在sql语句中是第1个字段, 也就是下标为0
+    $allPages = ceil($totalItems / PAGE_SIZE);
+    $start = ($pageIndex-1)*PAGE_SIZE;
     $sql = "select * from movies where movie_type like '%{$type}%' ORDER BY movie_id DESC";
+    $sql .= " limit $start, ".PAGE_SIZE;
+    $json["count"] = $totalItems;
 } else if(!empty($_GET['movieId'])) {
     $movieId = $_GET['movieId'];
     $sql = "select * from movies where movie_id = '{$movieId}'";

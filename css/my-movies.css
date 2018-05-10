@@ -12,7 +12,12 @@
     right: 0;
 }
 
+.movie-main {
+    position: relative;
+}
+
 .movie-list {
+    height: 850px;
     letter-spacing: -0.31em;
     margin-left: -26px;
 }
@@ -114,8 +119,13 @@
 
 /* 电影分类为空的提示 */
 .movie-empty {
-    height: 300px;
-    line-height: 300px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% + 26px);
+    height: 850px;
+    margin-left: -26px;
+    line-height: 850px;
     text-align: center;
     font-size: 14px;
 }

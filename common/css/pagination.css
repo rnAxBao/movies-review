@@ -1,0 +1,50 @@
+@charset "UTF-8";
+.m-style {
+    position: relative;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.m-style span {
+    display: inline-block;
+    margin: 0 5px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: #bdbdbd;
+    font-size: 12px;
+}
+
+.m-style .active {
+    display: inline-block;
+    margin: 0 5px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background: #337ab7;
+    color: #fff;
+    font-size: 12px;
+    border: 1px solid #337ab7;
+}
+
+.m-style a {
+    display: inline-block;
+    margin: 0 5px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    color: #bdbdbd;
+    font-size: 12px;
+}
+
+.m-style a:hover {
+    color: #fff;
+    background: #337ab7;
+}
+
+.m-style .next,
+.m-style .prev {
+    font-weight: bold;
+}

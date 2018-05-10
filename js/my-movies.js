@@ -1,12 +1,42 @@
 $(function () {
     /* 获取电影 */
-    getMovies();
+    getMovies(1, function (res) {
+        let totalItems = res.count;
+        let pages = Math.ceil((totalItems - 0) / 15);
+        $(".paging").pagination({
+            pageCount: pages,
+            mode: 'fixed',
+            count: 10,
+            prevContent: '<',
+            nextContent: '>',
+            isHide: true,
+            callback: function (api) {
+                $(".movie-list").empty();
+                getMovies(api.getCurrent());
+            }
+        });
+    });
     $(".movie-class .nav-tabs li a").each(function () {
         $(this).click(function () {
             $(this).parent().addClass("active").siblings().removeClass("active");
             $(".movie-list").empty();
             $(".movie-main .movie-empty").remove();
-            getMovies();
+            getMovies(1, function (res) {
+                let totalItems = res.count;
+                let pages = Math.ceil((totalItems - 0) / 15);
+                $(".paging").pagination({
+                    pageCount: pages,
+                    mode: 'fixed',
+                    count: 10,
+                    prevContent: '<',
+                    nextContent: '>',
+                    isHide: true,
+                    callback: function (api) {
+                        $(".movie-list").empty();
+                        getMovies(api.getCurrent());
+                    }
+                });
+            });
         });
     });
 
@@ -24,9 +54,10 @@ $(function () {
         }
     });
 
-    function getMovies() {
+    function getMovies(pageIndex, fun) {
         $.getJSON("getMovies.php", {
-            type: $(".movie-class .active a").text()
+            type: $(".movie-class .active a").text(),
+            pageIndex: pageIndex
         }, function (data) {
             let res = data;
             if(res.datas) {
@@ -42,6 +73,9 @@ $(function () {
             } else {
                 $(".movie-main .movie-empty").remove();
                 $(".movie-main").append($("<div>").addClass("movie-empty").text("抱歉!该分类下暂时没有影片,请联系站长添加!"));
+            }
+            if(fun) {
+                fun(res);
             }
         });
     }
@@ -114,8 +148,3 @@ $(function () {
         }
     }
 });
-
-function isReg(str, regCon) {
-    let reg = regCon;
-    return reg.test(str);
-}
