@@ -8,7 +8,8 @@ $(function () {
             let data = res;
             /* 电影信息 */
             /* 进口电影显示中文名及外文名 */
-            if (isReg(data.attrs.title[0], /^[\u4e00-\u9fa5]$/)) {
+            let country = data.attrs.country.join("/")
+            if (country.indexOf("中国大陆") > -1) {
                 $("title, .con-left .moviename").text(data.attrs.title[0]);
                 $(".subject .subject-info .aka").text(data.alt_title);
             } else {
@@ -31,7 +32,6 @@ $(function () {
             $(".subject .subject-info .actors").text(cast);
             let movie_type = data.attrs.movie_type.join("/");
             $(".subject .subject-info .genre").text(movie_type);
-            let country = data.attrs.country.join("/")
             $(".subject .subject-info .countries").text(country);
 
             /* 豆瓣评分 */

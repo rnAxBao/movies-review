@@ -6,7 +6,7 @@ $(function () {
         let data = res;
         /* 电影信息 */
         /* 进口电影显示中文名及外文名 */
-        if (isReg(data.datas[0].title, /^[\u4e00-\u9fa5]$/)) {
+        if (data.datas[0].country.indexOf("中国大陆") > -1) {
             $("title, .con-left .moviename").text(data.datas[0].title);
             $(".subject .subject-info .aka").text(data.datas[0].aka);
         } else {
@@ -194,8 +194,3 @@ $(function () {
         }
     });
 });
-
-function isReg(str, regCon) {
-    let reg = regCon;
-    return reg.test(str);
-}

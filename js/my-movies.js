@@ -52,7 +52,7 @@ $(function () {
         let movieId = data.datas[index].movieId;
         let moviePic = data.datas[index].image;
         let movieName = "";
-        if (isReg(data.datas[index].title, /^[\u4e00-\u9fa5]$/)) {
+        if (data.datas[index].country.indexOf("中国大陆") > -1) {
             movieName = data.datas[index].title;
         } else {
             movieName = data.datas[index].aka.split(" / ")[0];
