@@ -5,8 +5,8 @@
     $host = "127.0.0.1";
     $user = "root";
     $password = "12345678";
-    $database = "mymovie";
-    $port = 8889;
+    $database = "mymovie";//数据库名
+    $port = 8889;//MySQL端口号
 
     $mysql = new mysqli($host, $user, $password, $database, $port);
     if ($mysql->connect_error) {
