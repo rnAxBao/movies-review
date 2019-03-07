@@ -1,4 +1,4 @@
-# movies-review
+# Movies-review
 利用html,js,php,mysql实现的个人影评网  
 数据库配置在connect.php文件里
 ```php
@@ -18,3 +18,4 @@
     }
 ```
 电影资源库依靠豆瓣电影  
+(当时年轻的自己啊😂)
